@@ -11,8 +11,17 @@ class WindowClass(QMainWindow, from_class):
         self.setupUi(self)
 
     def closeEvent(self, event):
-        print("close test")
-        # event.ignore()
+        msgBox = QMessageBox()
+        msgBox.setText("정말로 창을 닫으시겠습니까?")
+        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msgBox.setDefaultButton(QMessageBox.No)
+
+        ret = msgBox.exec_()
+        if ret == QMessageBox.No:
+            event.ignore()
+        else:
+            event.accept()
+
 
 app = QApplication(sys.argv)
 mainWindow = WindowClass()
