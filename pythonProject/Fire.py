@@ -1,11 +1,15 @@
 import sys
-import self
+import os
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-from PyQt5.QtCore import QTime
-from PyQt5.QtGui import  QPixmap
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "resource"))
+
+import main_rc
+
 
 from_class = uic.loadUiType("./Fire.ui")[0]
+
 
 class WindowClass(QMainWindow, from_class):
     def __init__(self):

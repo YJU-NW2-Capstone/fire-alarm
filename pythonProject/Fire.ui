@@ -101,17 +101,30 @@
      <string>Fire</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="main_img">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>230</y>
-      <width>56</width>
-      <height>12</height>
+      <x>50</x>
+      <y>130</y>
+      <width>521</width>
+      <height>381</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/newPrefix/main.jpg);
+image: url(:/newPrefix/main.jpg);</string>
+    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resource/main.qrc">:/newPrefix/main.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
@@ -169,11 +182,39 @@
      </item>
     </layout>
    </widget>
-   <zorder>label</zorder>
+   <widget class="QLabel" name="timeLabel">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>80</y>
+      <width>56</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="dateLabel">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>70</y>
+      <width>56</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>main_img</zorder>
    <zorder>verticalLayoutWidget</zorder>
    <zorder>horizontalLayoutWidget</zorder>
    <zorder>Title</zorder>
    <zorder>Time</zorder>
+   <zorder>timeLabel</zorder>
+   <zorder>dateLabel</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action">
@@ -187,6 +228,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource/main.qrc"/>
+ </resources>
  <connections/>
 </ui>
