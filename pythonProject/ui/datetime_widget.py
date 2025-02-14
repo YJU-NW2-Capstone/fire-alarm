@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import QLabel
 from PyQt5.QtCore import QDate, QTime, Qt, QTimer
 from PyQt5.QtGui import QFont
 
-
 class DateTimeLabel(QLabel):
     def __init__(self, parent=None):
         super().__init__(parent)
