@@ -1,108 +1,12 @@
-# import sys
-# import os
-# from PyQt5.QtWidgets import *
-# from PyQt5 import uic
-# from PyQt5.QtCore import QDate, QTime, Qt, QTimer
-# from PyQt5.QtGui import QFont
-#
-# sys.path.append(os.path.join(os.path.dirname(__file__), "resource"))
-#
-# import main_rc
-#
-#
-# from_class = uic.loadUiType("./Fire.ui")[0]
-#
-#
-# class WindowClass(QMainWindow, from_class):
-#     def __init__(self):
-#         super().__init__()
-#         self.setupUi(self)
-#         self.date = QDate.currentDate()
-#         self.initUI()
-#
-#     def closeEvent(self, event):
-#         msgBox = QMessageBox()
-#         msgBox.setText("정말로 창을 닫으시겠습니까?")
-#         msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-#         msgBox.setDefaultButton(QMessageBox.No)
-#
-#         ret = msgBox.exec_()
-#         if ret == QMessageBox.No:
-#             event.ignore()
-#         else:
-#             event.accept()
-#
-#     def initUI(self):
-#         # 날짜와 시간 레이블 생성
-#         self.dateTimeLabel = QLabel(self)
-#
-#         # 글꼴과 크기 설정
-#         font = QFont('Arial', 12)
-#         self.dateTimeLabel.setFont(font)
-#
-#         # 현재 날짜와 시간 가져오기
-#         currentDate = QDate.currentDate().toString(Qt.DefaultLocaleLongDate)
-#         currentTime = QTime.currentTime().toString('hh:mm:ss')
-#
-#         # 레이블에 날짜와 시간 설정
-#         self.dateTimeLabel.setText(f'{currentDate} {currentTime}')
-#
-#         # 레이블 크기 조정
-#         self.dateTimeLabel.adjustSize()
-#
-#         # 레이블 위치 설정
-#         self.dateTimeLabel.move(
-#             self.width() - self.dateTimeLabel.width() - 10,
-#             10
-#         )
-#
-#         # 타이머 설정: 1초마다 업데이트
-#         self.timer = QTimer(self)
-#         self.timer.timeout.connect(self.updateDateTime)
-#         self.timer.start(1000)
-#
-#         self.setWindowTitle('Date and Time')
-#         self.show()
-#
-#     def updateDateTime(self):
-#         # 현재 날짜와 시간 가져오기
-#         currentDate = QDate.currentDate().toString(Qt.DefaultLocaleLongDate)
-#         currentTime = QTime.currentTime().toString('hh:mm:ss')
-#
-#         # 레이블에 날짜와 시간 업데이트
-#         self.dateTimeLabel.setText(f'{currentDate} {currentTime}')
-#
-#         # 레이블 크기 재조정
-#         self.dateTimeLabel.adjustSize()
-#
-#         # 레이블 위치 재조정
-#         self.dateTimeLabel.move(
-#             self.width() - self.dateTimeLabel.width() - 10,
-#             10
-#         )
-#
-#     def resizeEvent(self, event):
-#         # 레이블 위치 업데이트
-#         self.dateTimeLabel.move(
-#             self.width() - self.dateTimeLabel.width() - 10,
-#             10
-#         )
-#         super().resizeEvent(event)
-#
-# app = QApplication(sys.argv)
-# mainWindow = WindowClass()
-# mainWindow.show()
-# app.exec_()
-
-# main.py
-
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
-# import main_rc   # 필요에 따라 임포트
-from ui.datetime_widget import DateTimeLabel
-from_class = uic.loadUiType("./Fire.ui")[0]
+from PyQt5.QtCore import QTimer, QDate, QTime, Qt
 
+# DateTimeLabel 임포트
+from ui.datetime_widget import DateTimeLabel
+
+from_class = uic.loadUiType("./Fire.ui")[0]
 
 class WindowClass(QMainWindow, from_class):
     def __init__(self):
@@ -110,43 +14,68 @@ class WindowClass(QMainWindow, from_class):
         self.setupUi(self)
         self.initUI()
 
-    def closeEvent(self, event):
-        msgBox = QMessageBox()
-        msgBox.setText("정말로 창을 닫으시겠습니까?")
-        msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-        msgBox.setDefaultButton(QMessageBox.No)
+        # 버튼 리스트 생성
+        self.buttons = [self.pushButton, self.pushButton_2, self.pushButton_3]
 
-        ret = msgBox.exec_()
-        if ret == QMessageBox.No:
-            event.ignore()
-        else:
-            event.accept()
+        # 초기 페이지 설정 및 버튼 스타일 업데이트
+        self.stackedWidget.setCurrentIndex(0)
+        self.updateButtonStyles(self.pushButton)
+
+        # 페이지 전환 버튼 연결
+        self.pushButton.clicked.connect(lambda: self.changePage(0, self.pushButton))
+        self.pushButton_2.clicked.connect(lambda: self.changePage(1, self.pushButton_2))
+        self.pushButton_3.clicked.connect(lambda: self.changePage(2, self.pushButton_3))
 
     def initUI(self):
-        # 날짜와 시간 레이블 생성
+        # DateTimeLabel 생성
         self.dateTimeLabel = DateTimeLabel(self)
+        # 타이머 설정: 1초마다 업데이트
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.updateDateTime)
+        self.timer.start(1000)
 
-        # 레이블 위치 설정
-        self.dateTimeLabel.move(
-            self.width() - self.dateTimeLabel.width() - 10,
-            10
-        )
+        # 초기 날짜 및 시간 표시
+        self.updateDateTime()
 
-        self.show()
+    def updateDateTime(self):
+        # 현재 날짜와 시간 가져오기
+        currentDate = QDate.currentDate().toString(Qt.DefaultLocaleLongDate)
+        currentTime = QTime.currentTime().toString('hh:mm:ss')
 
-    def resizeEvent(self, event):
-        # 레이블 위치 업데이트
-        self.dateTimeLabel.move(
-            self.width() - self.dateTimeLabel.width() - 70,
-            10
-        )
-        super().resizeEvent(event)
+        # 레이블에 날짜와 시간 설정
+        self.dateTimeLabel.setText(f'{currentDate} {currentTime}')
+        self.dateTimeLabel.adjustSize()
 
+        # 레이블 위치 재조정
+        window_width = self.width()
+        window_height = self.height()
 
+        x_position = int(window_width * 0.9) - self.dateTimeLabel.width()
+        y_position = int(window_height * 0.01)
+
+        self.dateTimeLabel.move(x_position, y_position)
+
+        # 다시 그리기
+        self.dateTimeLabel.show()
+
+    def changePage(self, index, button):
+        self.stackedWidget.setCurrentIndex(index)
+        self.updateDateTime()
+        self.updateButtonStyles(button)
+
+    def updateButtonStyles(self, selectedButton):
+        default_style = 'background-color: blue; color: white;'
+        selected_style = 'background-color: red; color: white;'
+
+        # 모든 버튼에 기본 스타일 적용
+        for button in self.buttons:
+            button.setStyleSheet(default_style)
+
+        # 선택된 버튼에 선택된 스타일 적용
+        selectedButton.setStyleSheet(selected_style)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     mainWindow = WindowClass()
     mainWindow.show()
     app.exec_()
-
