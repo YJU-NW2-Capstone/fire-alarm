@@ -1,6 +1,6 @@
 import flet as ft
 
-def create_settings_page(page: ft.Page):
+def create_settings_page():
     return ft.Container(
         content=ft.Column([
             ft.Text("설정 페이지", size=20, weight=ft.FontWeight.BOLD),

@@ -8,3 +8,4 @@ def create_situation_page(page: ft.Page):
         ]),
         padding=10
     )
+ 

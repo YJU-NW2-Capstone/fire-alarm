@@ -41,7 +41,7 @@ def create_main_page(page: ft.Page):
         padding=ft.padding.only(top=20, right=20, left=20),
         expand=True,
         alignment=ft.alignment.center
-        # bgcolor 제거 -> 기본 배경색 사용
+
     )
 
     # 업데이트 함수: 필요 시 사용 (비동기 함수로 변경)
