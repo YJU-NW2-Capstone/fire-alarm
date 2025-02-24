@@ -1,9 +1,0 @@
-<RCC>
-  <qresource prefix="newPrefix">
-    <file>map.jpg</file>
-    <file>다운로드.png</file>
-    <file>.jpg</file>
-    <file>main.jpg</file>
-    <file>main.jpg</file>
-  </qresource>
-</RCC>
