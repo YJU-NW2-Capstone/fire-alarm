@@ -8,9 +8,9 @@ from situation_page import create_situation_page
 from settings_page import create_settings_page
 
 # MQTT 설정
-MQTT_BROKER = "broker.hivemq.com"  # 브로커 주소
+MQTT_BROKER = "172.21.4.168"  # 브로커 주소
 MQTT_PORT = 1883  # 브로커 포트
-MQTT_TOPIC = "your/topic"  # 구독할 토픽
+MQTT_TOPIC = "/modbus/relay44973/out/+"  # 구독할 토픽
 
 def main(page: ft.Page):
     page.title = "영진 화재경보 시스템"
@@ -44,15 +44,16 @@ def main(page: ft.Page):
     try:
         client.connect(MQTT_BROKER, MQTT_PORT, 60)
         client.loop_start()
-    except:
+    except Exception as e:
         connection_status.value = "연결 상태: 나쁨"
         connection_status.color = "red"
+        print("MQTT 연결 오류:", e)
 
     async def update_time():
         while True:
             now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             time_text.value = now
-            await page.update_async()
+            page.update()  # 동기 업데이트 방식 사용
             await asyncio.sleep(1)
 
     fire_label = ft.Container(
@@ -77,13 +78,14 @@ def main(page: ft.Page):
         padding=10
     )
 
+    # 만약 페이지 내용에서 동적 업데이트 함수가 필요하다면 update_signal 속성을 추가할 수 있음
     async def global_update():
         while True:
             now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             time_text.value = now
             if hasattr(content_area.content, 'update_signal'):
                 await content_area.content.update_signal()
-            await page.update_async()
+            page.update()  # 여기서 await page.update_async() 대신 page.update() 사용
             await asyncio.sleep(1)
 
     def create_page_with_update(create_func):
@@ -104,11 +106,14 @@ def main(page: ft.Page):
     def change_page(e):
         selected_index = e.control.selected_index
         labels = list(page_creators.keys())
+
         if 0 <= selected_index < len(labels):
             selected_label = labels[selected_index]
-            new_content = page_creators[selected_label]()
+            new_content = page_creators[selected_label]()  # 새로운 페이지 생성
+            
+            # 기존 내용을 교체 후 content_area 업데이트
             content_area.content = new_content
-            page.update()
+            content_area.update()
 
     nav_rail = ft.NavigationRail(
         selected_index=0,
@@ -119,7 +124,7 @@ def main(page: ft.Page):
             ft.NavigationRailDestination(icon=ft.Icons.HOME, label="메인"),
             ft.NavigationRailDestination(icon=ft.Icons.LIST, label="로그"),
             ft.NavigationRailDestination(icon=ft.Icons.ASSESSMENT, label="상황"),
-            ft.NavigationRailDestination(icon=ft.Icons.SETTINGS, label="설정"),
+            ft.NavigationRailDestination(icon=ft.Icons.SETTINGS, label="설정")
         ],
         on_change=change_page
     )
@@ -140,8 +145,13 @@ def main(page: ft.Page):
 
     page.add(layout)
     
+    # 초기 페이지 설정
     content_area.content = create_main_page(page)
-    page.run_task(global_update)
+    content_area.update()
+
+    # 시간 업데이트 작업 실행 (필요에 따라 global_update 대신 사용)
+    page.run_task(update_time)
+    # page.run_task(global_update)  # 둘 중 하나만 실행
 
     page.window_maximized = True
     page.update()

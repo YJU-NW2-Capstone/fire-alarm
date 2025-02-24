@@ -1,6 +1,5 @@
 import flet as ft
 import asyncio
-import random
 
 def create_main_page(page: ft.Page):
     image_path = "resource/찐메인.png"
@@ -21,34 +20,36 @@ def create_main_page(page: ft.Page):
         bgcolor="#a0a0a0",
     )
 
-    image = ft.Image(
-        src=image_path,
-        width=300,
-        height=200,
-        fit=ft.ImageFit.CONTAIN
-    )
-
-    signal_status = ft.Text("신호 상태: 대기 중", size=16, color="blue")
-
-    async def update_signal():
-        status = "High" if random.choice([True, False]) else "Low"
-        color = "green" if status == "High" else "red"
-        signal_status.value = f"신호 상태: {status}"
-        signal_status.color = color
+    try:
+        image = ft.Image(
+            src=image_path,
+            width=300,
+            height=200,
+            fit=ft.ImageFit.CONTAIN
+        )
+    except Exception as e:
+        print(f"이미지 로드 오류: {e}")
+        image = ft.Container()  # 이미지 로드 실패 시 빈 컨테이너 반환
 
     container = ft.Container(
         content=ft.Column([
             ft.Container(height=50),
             ft.Row([image], alignment=ft.MainAxisAlignment.CENTER),
             ft.Container(height=20),
-            ft.Row([signal_status], alignment=ft.MainAxisAlignment.CENTER),
-            ft.Container(height=20),
             ft.Row([safety_rules], alignment=ft.MainAxisAlignment.END)
         ], alignment=ft.MainAxisAlignment.START, spacing=10),
         padding=ft.padding.only(top=20, right=20, left=20),
         expand=True,
         alignment=ft.alignment.center
+        # bgcolor 제거 -> 기본 배경색 사용
     )
 
+    # 업데이트 함수: 필요 시 사용 (비동기 함수로 변경)
+    async def update_signal():
+        while True:
+            page.update()
+            await asyncio.sleep(1)
+
     container.update_signal = update_signal
+
     return container

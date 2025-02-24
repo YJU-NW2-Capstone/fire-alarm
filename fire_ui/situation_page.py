@@ -1,6 +1,6 @@
 import flet as ft
 
-def create_situation_page():
+def create_situation_page(page: ft.Page):
     return ft.Container(
         content=ft.Column([
             ft.Text("상황 페이지", size=20, weight=ft.FontWeight.BOLD),
