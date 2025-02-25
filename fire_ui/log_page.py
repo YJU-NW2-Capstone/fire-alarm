@@ -1,6 +1,5 @@
 import flet as ft
 import paho.mqtt.client as mqtt
-import json
 
 def create_log_page(page: ft.Page):
     log_container = ft.Column(scroll=ft.ScrollMode.AUTO)

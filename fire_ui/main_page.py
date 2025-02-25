@@ -2,7 +2,7 @@ import flet as ft
 import asyncio
 
 def create_main_page(page: ft.Page):
-    image_path = "fire_ui\찐메인.png"
+    image_path = "fire_ui\source\찐메인.png"
 
     safety_rules = ft.Container(
         content=ft.Column([
