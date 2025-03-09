@@ -20,7 +20,7 @@ def create_situation_page(page: ft.Page):
 
     # 🔊 알람 소리 재생 함수
     def play_alert_sound():
-        audio = ft.Audio(src="fire_ui\source\siren.mp3", autoplay=True)
+        audio = ft.Audio(src="fire_ui\source\main_sound.mp3", autoplay=True)
         page.overlay.append(audio)  # 오디오를 overlay에 추가
         page.update()
 
