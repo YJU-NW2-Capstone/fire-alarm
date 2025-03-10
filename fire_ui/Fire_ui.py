@@ -125,7 +125,10 @@ def main(page: ft.Page): # 페이지 ui를 구성을 담당
         ], expand=True),
         status_bar
     ], expand=True)
-
+    def on_message(client, userdata, msg):
+        message = msg.payload.decode("utf-8")
+        print(f"MQTT 메시지 수신: {msg.topic} - {message}")
+        
     page.add(layout) # 기본화면을 메인페이지로 설정정
     
     content_area.content = create_main_page(page)
