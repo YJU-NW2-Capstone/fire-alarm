@@ -1,0 +1,100 @@
+2025-03-24 11:46:54,733 - INFO - [2025-03-24 11:46:54] MQTT 연결 성공 및 토픽 구독 완료
+2025-03-24 11:46:54,735 - INFO - [2025-03-24 11:46:54] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "N/A", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:46:54,776 - INFO - [2025-03-24 11:46:54] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:46:54,778 - INFO - [2025-03-24 11:46:54] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:46:54,779 - INFO - [2025-03-24 11:46:54] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "N/A"}
+2025-03-24 11:46:54,786 - INFO - [2025-03-24 11:46:54] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:47:21,662 - INFO - [2025-03-24 11:47:21] MQTT 연결 성공 및 토픽 구독 완료
+2025-03-24 11:47:21,664 - INFO - [2025-03-24 11:47:21] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "N/A", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:47:21,706 - INFO - [2025-03-24 11:47:21] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:47:21,708 - INFO - [2025-03-24 11:47:21] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:47:21,710 - INFO - [2025-03-24 11:47:21] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "N/A"}
+2025-03-24 11:47:21,711 - INFO - [2025-03-24 11:47:21] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:50:18,016 - INFO - [2025-03-24 11:50:18] MQTT 연결 성공 및 토픽 구독 완료
+2025-03-24 11:50:18,019 - INFO - [2025-03-24 11:50:18] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "N/A", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:50:18,061 - INFO - [2025-03-24 11:50:18] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:50:18,062 - INFO - [2025-03-24 11:50:18] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:50:18,064 - INFO - [2025-03-24 11:50:18] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "N/A"}
+2025-03-24 11:50:18,065 - INFO - [2025-03-24 11:50:18] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:51:07,745 - INFO - [2025-03-24 11:51:07] MQTT 연결 성공 및 토픽 구독 완료
+2025-03-24 11:51:07,749 - INFO - [2025-03-24 11:51:07] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "N/A", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:51:07,789 - INFO - [2025-03-24 11:51:07] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:51:07,792 - INFO - [2025-03-24 11:51:07] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:51:07,794 - INFO - [2025-03-24 11:51:07] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "N/A"}
+2025-03-24 11:51:07,796 - INFO - [2025-03-24 11:51:07] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:51:13,234 - INFO - [2025-03-24 11:51:13] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:51:13,284 - INFO - [2025-03-24 11:51:13] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:51:13,293 - INFO - [2025-03-24 11:51:13] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:51:13,297 - INFO - [2025-03-24 11:51:13] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:52:08,734 - INFO - [2025-03-24 11:52:08] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:52:08,775 - INFO - [2025-03-24 11:52:08] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:52:08,778 - INFO - [2025-03-24 11:52:08] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:52:08,779 - INFO - [2025-03-24 11:52:08] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:52:08,780 - INFO - [2025-03-24 11:52:08] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:52:45,736 - INFO - [2025-03-24 11:52:45] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:52:45,790 - INFO - [2025-03-24 11:52:45] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:52:45,797 - INFO - [2025-03-24 11:52:45] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:52:45,798 - INFO - [2025-03-24 11:52:45] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:53:41,237 - INFO - [2025-03-24 11:53:41] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:53:41,294 - INFO - [2025-03-24 11:53:41] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:53:41,303 - INFO - [2025-03-24 11:53:41] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:53:41,308 - INFO - [2025-03-24 11:53:41] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:54:51,930 - INFO - [2025-03-24 11:54:51] MQTT 연결 성공 및 토픽 구독 완료
+2025-03-24 11:54:51,934 - INFO - [2025-03-24 11:54:51] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "N/A", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:54:51,989 - INFO - [2025-03-24 11:54:51] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:54:51,998 - INFO - [2025-03-24 11:54:51] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:54:52,007 - INFO - [2025-03-24 11:54:52] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "N/A"}
+2025-03-24 11:54:52,017 - INFO - [2025-03-24 11:54:52] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:55:13,738 - INFO - [2025-03-24 11:55:13] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:55:13,786 - INFO - [2025-03-24 11:55:13] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:55:13,806 - INFO - [2025-03-24 11:55:13] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:55:13,814 - INFO - [2025-03-24 11:55:13] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:55:56,815 - INFO - [2025-03-24 11:55:56] MQTT 연결 성공 및 토픽 구독 완료
+2025-03-24 11:55:56,820 - INFO - [2025-03-24 11:55:56] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "N/A", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:55:56,875 - INFO - [2025-03-24 11:55:56] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:55:56,883 - INFO - [2025-03-24 11:55:56] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:55:56,893 - INFO - [2025-03-24 11:55:56] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "N/A"}
+2025-03-24 11:55:56,904 - INFO - [2025-03-24 11:55:56] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:56:09,239 - INFO - [2025-03-24 11:56:09] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:56:09,291 - INFO - [2025-03-24 11:56:09] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:56:09,299 - INFO - [2025-03-24 11:56:09] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:56:09,304 - INFO - [2025-03-24 11:56:09] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:56:46,239 - INFO - [2025-03-24 11:56:46] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:56:46,287 - INFO - [2025-03-24 11:56:46] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:56:46,290 - INFO - [2025-03-24 11:56:46] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:56:46,293 - INFO - [2025-03-24 11:56:46] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:56:46,297 - INFO - [2025-03-24 11:56:46] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:57:10,335 - INFO - [2025-03-24 11:57:10] MQTT 연결 성공 및 토픽 구독 완료
+2025-03-24 11:57:10,340 - INFO - [2025-03-24 11:57:10] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "N/A", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:57:10,395 - INFO - [2025-03-24 11:57:10] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:57:10,398 - INFO - [2025-03-24 11:57:10] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "N/A", "i2": "N/A"}
+2025-03-24 11:57:10,402 - INFO - [2025-03-24 11:57:10] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "N/A"}
+2025-03-24 11:57:10,405 - INFO - [2025-03-24 11:57:10] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:57:41,741 - INFO - [2025-03-24 11:57:41] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:57:41,786 - INFO - [2025-03-24 11:57:41] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:57:41,788 - INFO - [2025-03-24 11:57:41] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:57:41,790 - INFO - [2025-03-24 11:57:41] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:58:18,741 - INFO - [2025-03-24 11:58:18] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:58:18,790 - INFO - [2025-03-24 11:58:18] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:58:18,793 - INFO - [2025-03-24 11:58:18] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 11:58:18,797 - INFO - [2025-03-24 11:58:18] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 12:00:12,874 - INFO - [2025-03-24 12:00:12] MQTT 연결 성공 및 토픽 구독 완료
+2025-03-24 12:00:12,879 - INFO - [2025-03-24 12:00:12] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "N/A", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 12:00:12,932 - INFO - [2025-03-24 12:00:12] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 12:00:12,934 - INFO - [2025-03-24 12:00:12] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "N/A", "i2": "N/A"}
+2025-03-24 12:00:12,937 - INFO - [2025-03-24 12:00:12] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "N/A"}
+2025-03-24 12:00:12,941 - INFO - [2025-03-24 12:00:12] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 12:00:46,744 - INFO - [2025-03-24 12:00:46] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 12:00:46,797 - INFO - [2025-03-24 12:00:46] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 12:00:46,805 - INFO - [2025-03-24 12:00:46] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 12:00:46,809 - INFO - [2025-03-24 12:00:46] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 12:02:16,191 - INFO - [2025-03-24 12:02:16] MQTT 연결 성공 및 토픽 구독 완료
+2025-03-24 12:02:16,196 - INFO - [2025-03-24 12:02:16] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "N/A", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 12:02:16,250 - INFO - [2025-03-24 12:02:16] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "N/A", "i1": "N/A", "i2": "N/A"}
+2025-03-24 12:02:16,259 - INFO - [2025-03-24 12:02:16] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "N/A", "i2": "N/A"}
+2025-03-24 12:02:16,267 - INFO - [2025-03-24 12:02:16] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "N/A"}
+2025-03-24 12:02:16,276 - INFO - [2025-03-24 12:02:16] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 12:02:19,246 - INFO - [2025-03-24 12:02:19] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 12:02:19,295 - INFO - [2025-03-24 12:02:19] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 12:02:19,303 - INFO - [2025-03-24 12:02:19] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
+2025-03-24 12:02:19,308 - INFO - [2025-03-24 12:02:19] MQTT 메시지 수신: {"lwt_availability": "online", "r1": "OFF", "r2": "ON", "i1": "OFF", "i2": "OFF"}
