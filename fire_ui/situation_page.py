@@ -2,44 +2,56 @@ import flet as ft
 import paho.mqtt.client as mqtt
 from datetime import datetime
 import asyncio
+import os
 
-# MQTT 브로커 정보
 BROKER = "10.40.1.58"
 PORT = 1883
 TOPIC = "/modbus/relay44973/out/+"
+HISTORY_FILE = "alarm_history.txt"  # 🔹 이력 저장 파일
 
-# 전역 상태 변수
 fire_status = "현재 감지된 화재 없음"
-alarm_history = []
-mqtt_client = None  # MQTT 클라이언트를 전역으로 관리
-current_audio = None  # 현재 재생 중인 알림음 Audio 객체 저장
+alarm_history = []  # 🔥 화재 감지 이력 저장 리스트
+mqtt_client = None
+current_audio = None
+
+# 📂 이력 파일에서 데이터 불러오기
+def load_alarm_history():
+    global alarm_history
+    if os.path.exists(HISTORY_FILE):
+        with open(HISTORY_FILE, "r", encoding="utf-8") as file:
+            alarm_history = file.read().splitlines()  # 한 줄씩 읽어서 리스트로 변환
+
+# 💾 현재 이력 데이터를 파일에 저장
+def save_alarm_history():
+    with open(HISTORY_FILE, "w", encoding="utf-8") as file:
+        file.write("\n".join(alarm_history))  # 리스트를 줄 단위로 저장
+    print("💾 화재 이력 저장 완료!")
 
 def create_situation_page(page: ft.Page):
     global mqtt_client, fire_status, alarm_history, current_audio
     page.title = "화재 감지 시스템 - 상황 페이지"
 
-    # UI 요소 생성
     fire_status_text = ft.Text(fire_status, size=20, weight="bold", color="green")
     alarm_history_list = ft.ListView(expand=True, spacing=10, padding=10)
 
-    # 알람 이력을 업데이트하는 함수
+    # 🔄 UI 업데이트 함수
     def update_alarm_history():
         alarm_history_list.controls.clear()
         for msg in alarm_history:
             alarm_history_list.controls.append(ft.Text(msg, size=16, color="red"))
-        # ListView가 페이지에 추가된 이후에만 scroll_to 호출
-        if alarm_history_list.page is not None and alarm_history_list.controls:
+
+        if alarm_history_list.page and alarm_history_list.controls:
             alarm_history_list.scroll_to(len(alarm_history_list.controls) - 1)
         page.update()
 
-    # 알림음 재생 함수 (audio 객체를 저장)
+    # 🔊 알림음 재생
     def play_alert_sound():
         global current_audio
         current_audio = ft.Audio(src="source\\main_sound.mp3", autoplay=True)
         page.overlay.append(current_audio)
         page.update()
 
-    # 알림음을 중지하는 함수
+    # 🔇 알림음 중지
     def stop_alert_sound(e):
         global current_audio
         if current_audio and current_audio in page.overlay:
@@ -47,33 +59,31 @@ def create_situation_page(page: ft.Page):
             current_audio = None
             page.update()
 
-    # 화재 발생 시 즉시 UI 업데이트 및 알람 이력 기록
+    # 🚨 화재 감지 시 UI 업데이트 및 이력 추가
     def fire_alarm_trigger():
         global fire_status, alarm_history
         if page.window.minimized:
             page.window.minimized = False  # 창 복원
 
-        # 알림음 즉시 재생
         play_alert_sound()
 
-        # 즉시 UI 업데이트 진행
         fire_status = "🔥 화재 감지됨! 🔥"
         fire_status_text.value = fire_status
         fire_status_text.color = "red"
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         alarm_message = f"🚨 [경보] {timestamp} - 화재 감지!"
-        alarm_history.append(alarm_message)
-        update_alarm_history()  # 알람 이력 UI 업데이트
+        alarm_history.append(alarm_message)  # 리스트에 추가
+        save_alarm_history()  # 🔄 이력 파일 저장
+        update_alarm_history()  # 🔄 UI 즉시 반영
 
-    # MQTT 메시지 수신 시 호출되는 콜백 함수
+    # 📩 MQTT 메시지 수신 처리
     def on_message(client, userdata, msg):
         payload = msg.payload.decode("utf-8")
         topic = msg.topic
-        # i1 토픽에서 "OFF" 메시지가 오면 즉시 화재 발생 처리
-        if topic == "/modbus/relay44973/out/i1" and payload == "OFF":
+        if topic == "/modbus/relay44973/out/i1" and payload == "ON":
             fire_alarm_trigger()
 
-    # MQTT 클라이언트가 이미 생성되지 않은 경우에만 생성
+    # 🛠 MQTT 클라이언트 설정
     if mqtt_client is None:
         mqtt_client = mqtt.Client()
         mqtt_client.on_message = on_message
@@ -83,18 +93,22 @@ def create_situation_page(page: ft.Page):
             mqtt_client.loop_start()
             print("🔥 MQTT 연결됨! 메시지 대기 중...")
         except Exception as e:
-            print("MQTT 연결 오류:", e)
+            print("❌ MQTT 연결 오류:", e)
 
-    # 주기적으로 알람 이력을 갱신하는 비동기 작업
+    # 🔄 주기적 업데이트 실행
     async def periodic_update():
         while True:
-            update_alarm_history()
-            await asyncio.sleep(1)  # 1초마다 업데이트
+            update_alarm_history()  # 이력을 주기적으로 갱신
+            await asyncio.sleep(1)
 
-    # "알림음 중지" 버튼 추가
+    # 🆕 앱 실행 시 이전 이력 불러오기
+    load_alarm_history()
+    update_alarm_history()  # 불러온 이력을 UI에 반영
+
+    # 🔘 알림음 중지 버튼
     stop_alarm_button = ft.ElevatedButton("알림음 중지", on_click=stop_alert_sound)
 
-    # 페이지 UI 구성
+    # 📜 UI 구성
     content = ft.Column(
         controls=[
             ft.Text("📌 실시간 화재 감지 현황", size=24, weight="bold"),
@@ -106,7 +120,7 @@ def create_situation_page(page: ft.Page):
         spacing=20
     )
 
-    # 페이지 로드시 주기적 업데이트 작업 실행
+    # 주기적 업데이트 실행
     page.run_task(periodic_update)
 
     return content
