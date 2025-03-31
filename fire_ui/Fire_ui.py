@@ -4,7 +4,6 @@ import asyncio
 import paho.mqtt.client as mqtt
 from main_page import create_main_page
 from log_page import create_log_page
-from situation_page import create_situation_page
 from settings_page import create_settings_page
 
 # MQTT 설정
@@ -76,7 +75,7 @@ def main(page: ft.Page):
 
     content_area = ft.Container(
         expand=True,
-        border=ft.border.all(1, ft.colors.GREY_400),
+        border=ft.border.all(1, ft.Colors.GREY_400),
         border_radius=5,
         padding=10
     )
@@ -90,15 +89,13 @@ def main(page: ft.Page):
     page_creators = {
         "메인": create_page_with_update(create_main_page),
         "로그": create_page_with_update(create_log_page),
-        "상황": create_page_with_update(create_situation_page),
         "설정": create_page_with_update(create_settings_page)
     }
 
     nav_destinations = [
-        ft.NavigationRailDestination(icon=ft.icons.HOME, label="메인"),
-        ft.NavigationRailDestination(icon=ft.icons.LIST, label="로그"),
-        ft.NavigationRailDestination(icon=ft.icons.ASSESSMENT, label="상황"),
-        ft.NavigationRailDestination(icon=ft.icons.SETTINGS, label="설정")
+        ft.NavigationRailDestination(icon=ft.Icons.HOME, label="메인"),
+        ft.NavigationRailDestination(icon=ft.Icons.LIST, label="로그"),
+        ft.NavigationRailDestination(icon=ft.Icons.SETTINGS, label="설정")
     ]
 
     nav_rail = ft.NavigationRail(
