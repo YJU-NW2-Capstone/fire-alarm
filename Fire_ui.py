@@ -1,15 +1,27 @@
 import flet as ft
 import datetime
 import asyncio
+import subprocess
+import psutil
 import paho.mqtt.client as mqtt
 from main_page import create_main_page, fire_status  # 🔸 상태 공유용 import
 from log_page import create_log_page
 from settings_page import create_settings_page
+import time
+from pystray import Icon, MenuItem, Menu
 from PIL import Image
-from pystray import Icon, Menu, MenuItem
 import threading
 import sys
 import os
+import winreg
+from app_state import AppState
+
+# ---------------- 상수 ----------------
+APP_NAME = "FireAlarmTray"
+ICON_LABEL = "FireAlarmTray"
+FLET_EXE_NAME = "Fire_ui.exe"
+RUN_KEY = r"Software\Microsoft\Windows\CurrentVersion\Run"
+MQTT_KEEP_ALIVE_INTERVAL = 60
 
 # ---------------- 리소스 경로 처리 ----------------
 def resource_path(relative_path):
@@ -17,23 +29,24 @@ def resource_path(relative_path):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.abspath("."), relative_path)
 
-# ---------------- 트레이 아이콘 설정 ----------------
-def run_tray_icon():
-    icon_path = resource_path("source/icon.ico")
-    icon_image = Image.open(icon_path)
-    tray_icon = Icon("FireAlarm", icon_image)
-    tray_icon.run()
+# ---------------- 시작 프로그램 등록 ----------------
+def register_startup():
+    exe_path = sys.executable
+    try:
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, RUN_KEY, 0, winreg.KEY_SET_VALUE) as key:
+            winreg.SetValueEx(key, APP_NAME, 0, winreg.REG_SZ, exe_path)
+        print(f"[INFO] 시작 프로그램에 {APP_NAME} 등록 성공")
+    except Exception as e:
+        print(f"[ERROR] 시작 프로그램 등록 실패: {e}")
 
-# ---------------- Flet 메인 함수 ----------------
-MQTT_BROKER = "10.40.1.58"
-MQTT_PORT = 1883
-MQTT_TOPIC = "/modbus/relay44973/out/+"
-MQTT_KEEP_ALIVE_INTERVAL = 60
-
+# ---------------- Flet 메인 ----------------
 def main(page: ft.Page):
     page.title = "영진 화재경보 시스템"
     page.vertical_alignment = ft.MainAxisAlignment.START
     page.window_maximized = True
+    icon_path = resource_path("source/icon.ico")
+    page.window_icon = icon_path
+    page.update()
 
     time_text = ft.Text("", size=14, color="white")
     status_bar = ft.Container(ft.Text("시스템 정상 작동 중"), alignment=ft.alignment.center, bgcolor="lightgray", padding=5)
@@ -55,7 +68,7 @@ def main(page: ft.Page):
         global fire_status
         fire_status = "🔥 화재 감지됨! 🔥"
         page.window_to_front()
-        change_page(0)  # 🔹 메인 페이지로 이동
+        change_page(0)
 
     def on_message(client, userdata, msg):
         nonlocal last_message_time
@@ -69,9 +82,9 @@ def main(page: ft.Page):
 
     def connect_mqtt():
         try:
-            client.connect(MQTT_BROKER, MQTT_PORT, MQTT_KEEP_ALIVE_INTERVAL)
+            client.connect(AppState.mqtt_broker, AppState.mqtt_port, MQTT_KEEP_ALIVE_INTERVAL)
             client.loop_start()
-            client.subscribe(MQTT_TOPIC)
+            client.subscribe(AppState.mqtt_topic)
         except Exception:
             connection_status.value = "MQTT 연결 상태: 오류"
             connection_status.color = "red"
@@ -166,8 +179,41 @@ def main(page: ft.Page):
     page.window_maximized = True
     page.update()
 
-# ---------------- 메인 실행부 ----------------
-if __name__ == "__main__":
-    tray_thread = threading.Thread(target=run_tray_icon, daemon=True)
-    tray_thread.start()
+# ---------------- 앱 실행 및 트레이 ----------------
+def run_flet_app():
     ft.app(target=main, view=ft.FLET_APP)
+
+def exit_all(icon, item):
+    try:
+        for proc in psutil.process_iter(['name', 'pid']):
+            if proc.info['name'] and proc.info['name'].lower() == FLET_EXE_NAME.lower():
+                proc.kill()
+                print(f"[INFO] 프로세스 강제 종료: {proc.info['pid']}")
+    except Exception as e:
+        print(f"[ERROR] 프로세스 종료 실패: {e}")
+    icon.stop()
+    print("[INFO] 트레이 종료 완료")
+    os._exit(0)
+
+def show_tray():
+    icon_path = resource_path("source/icon.ico")
+    image = Image.open(icon_path)
+
+    menu = Menu(
+        MenuItem("앱 실행", lambda icon, item: None),
+        MenuItem("종료", exit_all)
+    )
+
+    tray = Icon(ICON_LABEL, image, ICON_LABEL, menu)
+    tray.run()
+
+# ---------------- 진입점 ----------------
+if __name__ == "__main__":
+    register_startup()
+
+    # 트레이 실행
+    tray_thread = threading.Thread(target=show_tray, daemon=True)
+    tray_thread.start()
+
+    # Flet 앱 백그라운드 실행
+    run_flet_app()

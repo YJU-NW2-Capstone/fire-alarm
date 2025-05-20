@@ -5,6 +5,9 @@ import logging
 import logging.handlers
 import threading
 import paho.mqtt.client as mqtt
+from app_state import AppState  # ✅ AppState에서 MQTT 설정 불러옴
+
+
 
 # 로그 파일 설정
 LOG_FILE = "mqtt_log.log"
@@ -19,16 +22,8 @@ file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 # MQTT 설정
-MQTT_BROKER = "10.40.1.58"
-MQTT_PORT = 1883
-MQTT_TOPICS = [
-    "/modbus/relay44973/out/r1",
-    "/modbus/relay44973/out/r2",
-    "/modbus/relay44973/out/i1",
-    "/modbus/relay44973/out/i2"
-]
 mqtt_client = mqtt.Client()
-mqtt_values = {topic: "N/A" for topic in MQTT_TOPICS}
+mqtt_values = {topic: "N/A" for topic in AppState.mqtt_topics}
 
 # 글로벌 변수
 global_log_list = None
@@ -57,17 +52,14 @@ def update_and_add_log(log_list):
         print("⚠️ MQTT 연결되지 않음, 로그 기록 생략")
         return
 
-    # 모든 토픽이 수신되지 않았으면 기록하지 않음
-    if len(received_topics) < len(MQTT_TOPICS):
+    if len(received_topics) < len(AppState.mqtt_topics):
         print("⚠️ 모든 MQTT 토픽 수신 안 됨, 로그 기록 생략")
         return
 
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_entry = (f"[{timestamp}] r1: {mqtt_values['/modbus/relay44973/out/r1']}, "
-                 f"r2: {mqtt_values['/modbus/relay44973/out/r2']}, "
-                 f"i1: {mqtt_values['/modbus/relay44973/out/i1']}, "
-                 f"i2: {mqtt_values['/modbus/relay44973/out/i2']}")
-
+    log_entry = f"[{timestamp}] " + ", ".join(
+        [f"{topic.split('/')[-1]}: {mqtt_values[topic]}" for topic in AppState.mqtt_topics]
+    )
     logger.info(log_entry)
 
     log_list.controls.append(ft.Text(log_entry, size=14))
@@ -88,7 +80,7 @@ def init_mqtt():
         if rc == 0:
             mqtt_connected = True
             print("✅ MQTT 연결 성공")
-            for topic in MQTT_TOPICS:
+            for topic in AppState.mqtt_topics:
                 client.subscribe(topic)
         else:
             mqtt_connected = False
@@ -96,7 +88,8 @@ def init_mqtt():
 
     def on_message(client, userdata, msg):
         global debounce_timer, global_log_list
-
+        AppState.add_mqtt_handler(on_message)
+        
         if msg.retain:
             print(f"⚠️ Retained 메시지 무시: {msg.topic}")
             return
@@ -114,7 +107,7 @@ def init_mqtt():
     mqtt_client.on_message = on_message
 
     try:
-        mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
+        mqtt_client.connect(AppState.mqtt_broker, AppState.mqtt_port, 60)
         mqtt_client.loop_start()
     except Exception as e:
         print(f"MQTT 연결 오류: {e}")
