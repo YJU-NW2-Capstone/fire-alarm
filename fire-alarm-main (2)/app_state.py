@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 
 class AppState:
-    mqtt_broker = "43.203.127.83"
+    mqtt_broker = "10.40.1.58"
     mqtt_port = 1883
     mqtt_topics = [
         "/modbus/relay44973/out/r1",
