@@ -1,0 +1,1 @@
+pyinstaller Fire_ui.py --noconsole --onefile --name FireUIApp --icon=icon.ico --add-data "source\찐메인.png;source" --add-data "source\image-removebg-preview.png;source" --add-data "source\main_sound.mp3;source"
