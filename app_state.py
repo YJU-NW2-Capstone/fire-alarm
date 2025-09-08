@@ -3,7 +3,7 @@ import threading
 
 class AppState:
 
-    mqtt_broker = "54.180.238.32"
+    mqtt_broker = "18.181.195.11"
     mqtt_port = 1883
     mqtt_topics = [
         "/modbus/relay44973/out/r1",
@@ -17,6 +17,30 @@ class AppState:
     _handler_lock = threading.Lock()  # 스레드 안전성
     alarm_active = False
     # current_fire_status = False
+
+    alarm_history_callbacks = []
+    _alarm_cb_lock = threading.Lock()
+
+    @classmethod
+    def add_alarm_history_callback(cls, cb):
+        with cls._alarm_cb_lock:
+            if cb not in cls.alarm_history_callbacks:
+                cls.alarm_history_callbacks.append(cb)
+
+    @classmethod
+    def remove_alarm_history_callback(cls, cb):
+        with cls._alarm_cb_lock:
+            if cb in cls.alarm_history_callbacks:
+                cls.alarm_history_callbacks.remove(cb)
+
+    @classmethod
+    def notify_alarm_history_changed(cls):
+        with cls._alarm_cb_lock:
+            for cb in cls.alarm_history_callbacks:
+                try:
+                    cb()
+                except Exception as e:
+                    print(f"알람이력 콜백 오류: {e}")
 
     @classmethod
     def add_mqtt_handler(cls, handler):
